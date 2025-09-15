@@ -1,0 +1,32 @@
+.form-wrapper {
+  background: linear-gradient(135deg, #e3f2fd, #fce4ec);
+  border-radius: 15px;
+  padding: 25px;
+}
+
+.text-gradient {
+  background: linear-gradient(45deg, #4a148c, #d81b60);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.smart-select {
+  transition: all 0.3s ease;
+}
+
+.smart-select:hover {
+  border-color: #4a148c;
+  box-shadow: 0 0 10px rgba(74, 20, 140, 0.3);
+}
+
+.btn-gradient {
+  background: linear-gradient(90deg, #43cea2, #185a9d);
+  color: #fff;
+  border: none;
+  font-weight: bold;
+}
+
+.btn-gradient:hover {
+  background: linear-gradient(90deg, #185a9d, #43cea2);
+  transform: scale(1.05);
+}

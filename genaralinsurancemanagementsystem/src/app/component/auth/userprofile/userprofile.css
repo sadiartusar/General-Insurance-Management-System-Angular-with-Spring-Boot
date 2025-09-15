@@ -1,0 +1,10 @@
+/* styles.css or component-specific CSS */
+p {
+  font-size: 16px;
+  color: #333;
+}
+
+.container {
+  border: 1px solid #ccc;
+  background: linear-gradient(to right, #f8f9fa, #e9ecef);
+}

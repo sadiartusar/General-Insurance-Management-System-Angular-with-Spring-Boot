@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="table table-stripd">
+    <h2>Health Insurance Policy List</h2>
+
+    <table border="1" width="100%">
+      <thead>
+        <tr class="bg-success">
+          <th>Policy ID</th>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Gender</th>
+          <th>Sum Insured</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Nominee</th>
+          <th>Relation</th>
+          <th>Email</th>
+          <th>Action</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let policy of policies ">
+          <td>{{ policy.id }}</td>
+          <td>{{ policy.policyHolderName }}</td>
+          <td>{{ policy.age }}</td>
+          <td>{{ policy.gender }}</td>
+          <td>{{ policy.sumInsured }}</td>
+          <td>{{ policy.policyStartDate | date }}</td>
+          <td>{{ policy.policyEndDate | date }}</td>
+          <td>{{ policy.nomineeName }}</td>
+          <td>{{ policy.nomineeRelation }}</td>
+          <td>{{ policy.email }}</td>
+
+          <td>
+            <button class="btn btn-warning m-1 p-1" (click)="getPolicyById(policy.id)">Edit</button>
+            <button class="btn btn-danger m-1 p-1" (click)="deletePolicy(policy.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

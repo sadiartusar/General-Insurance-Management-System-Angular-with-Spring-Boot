@@ -1,0 +1,115 @@
+package com.sadiar.insurancemangement.security;
+
+import com.sadiar.insurancemangement.jwt.JwtAuthenticationFilter;
+import com.sadiar.insurancemangement.jwt.JwtService;
+import com.sadiar.insurancemangement.service.AuthService;
+import com.sadiar.insurancemangement.service.UserService;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.List;
+
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig {
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http,
+                                           JwtAuthenticationFilter jwtAuthenticationFilter,
+                                           UserService userService) throws Exception {
+
+        return http
+                .csrf(AbstractHttpConfigurer::disable)
+                .cors(Customizer.withDefaults())
+                .authorizeHttpRequests(req -> req
+                        .requestMatchers(
+                                        "/api/user",
+                                        "/api/user/register/user",
+                                        "/api/user/register/admin",
+                                        "/api/admin/login",
+                                        "/api/user/login",
+                                        "/auth/login",
+                                        "/images/**",
+                                "/api/user/active/**",
+                                "/api/firepolicy/**",
+                                "/api/firepolicy/add",
+                                "/api/firebill/add",
+                                "/api/firebill/**",
+                                "/api/firemoneyreciept/**",
+                                "/api/firemoneyreciept/add",
+                                "/api/carpolicy/**",
+                                "/api/carpolicy/add",
+                                "/api/carbill/**",
+                                "/api/carbill/add",
+                                "/api/carmoneyreciept/**",
+                                "/api/carmoneyreciept/add",
+                                "/api/user/profile",
+                                "/api/payment/deposit/**",
+                                "/api/payment/balance/**",
+                                "/api/payment/pay",
+                                "/api/payment/company-balance/**",
+                                "/api/payment/showcompanydetails",
+                                "/api/payment/allpaymentdetails",
+                                "/api/user/all"
+                                ).permitAll()
+
+                        // Protected endpoints
+                        .requestMatchers("/api/user/register/admin").hasAuthority("ADMIN")
+                        .requestMatchers("/api/user/register/user").hasAuthority("USER")
+                        .requestMatchers(
+                                "/api/admin/login"
+                                ).hasAuthority("ADMIN")
+                        .requestMatchers("/api/user/login").hasAuthority("USER")
+                        .anyRequest().authenticated()
+                )
+                .userDetailsService(userService)
+                .sessionManagement(session ->
+                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                )
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .build();
+    }
+
+    @Bean
+    public JwtAuthenticationFilter jwtAuthenticationFilter(JwtService jwtService, UserService userService) {
+        return new JwtAuthenticationFilter(jwtService, userService);
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
+        return configuration.getAuthenticationManager();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(List.of("http://localhost:4200", "http://192.168.88.250:4200"));
+        configuration.setAllowedMethods(List.of("GET", "POST", "DELETE", "PUT", "OPTIONS"));
+        configuration.setAllowedHeaders(List.of("Authorization", "Cache-Control", "Content-Type"));
+        configuration.setAllowCredentials(true);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
+}

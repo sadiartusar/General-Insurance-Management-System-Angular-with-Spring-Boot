@@ -1,0 +1,46 @@
+<div class="container mt-5">
+  <h2 class="text-center mb-4 fw-bold" style="color: #4a148c; text-shadow: 1px 1px #ccc;">
+    Payment Details
+  </h2>
+
+  <div *ngIf="paymentDetails && paymentDetails.length > 0; else noData">
+    <div class="table-responsive shadow rounded p-2" style="background: #f8f9fa;">
+      <table class="table table-hover align-middle text-center mb-0" style="border-radius: 10px; overflow: hidden;">
+        <thead class="table-gradient text-white">
+          <tr>
+            <th>Payment ID</th>
+            <th>User ID</th>
+            <th>Amount</th>
+            <th>Payment Date</th>
+            <th>Payment Mode</th>
+            <th>User Email</th>
+            <th>User Phone</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let payment of paymentDetails" class="fade-in-row">
+            <td>{{ payment.id }}</td>
+            <td>{{ payment.user?.id }}</td>
+            <td>{{ payment.amount | currency:'INR' }}</td>
+            <td>{{ payment.paymentDate | date:'mediumDate' }}</td>
+            <td>{{ payment.paymentMode }}</td>
+            <td>{{ payment.user?.email }}</td>
+            <td>{{ payment.user?.phone }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <ng-template #noData>
+    <div class="alert alert-warning text-center fw-bold">
+      No payment details found.
+    </div>
+  </ng-template>
+</div>
+ <!-- Print Button -->
+<div class="d-flex justify-content-center mt-2">
+  <button class="btn btn-success" (click)="printStatement()">
+    <i class="fas fa-file-pdf"></i> Download PDF
+  </button>
+</div>

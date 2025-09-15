@@ -1,0 +1,37 @@
+.bg-gradient {
+  background: linear-gradient(135deg, #28a745, #20c997);
+  box-shadow: 0px 4px 15px rgba(0,0,0,0.2);
+}
+
+.form-title {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.form-card {
+  background: #ffffff;
+  border-radius: 15px;
+}
+
+.custom-input {
+  border-radius: 10px;
+  transition: all 0.3s ease-in-out;
+}
+
+.custom-input:focus {
+  border-color: #28a745;
+  box-shadow: 0 0 8px rgba(40, 167, 69, 0.6);
+  transform: scale(1.02);
+}
+
+.btn-animate {
+  border-radius: 25px;
+  font-weight: 600;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-animate:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
+}

@@ -1,0 +1,28 @@
+<div class="payment-container card-style">
+  <h2>Account Management</h2>
+
+  <div class="form-group">
+    <label for="accountId">User Account ID (Primary Key):</label>
+    <input type="number" [(ngModel)]="accountId" class="form-control" id="accountId" placeholder="Enter Account ID" />
+  </div>
+
+  <!-- Balance display -->
+  <p class="balance">User Balance: {{ userBalance | currency }}</p>
+  <!-- <p>Company Balance: {{ companyBalance | currency }}</p> -->
+
+  <!-- Amount input -->
+  <div class="form-group">
+    <label for="amount">Amount:</label>
+    <input type="number" [(ngModel)]="amount" class="form-control input-animated" id="amount"
+      placeholder="Enter amount" />
+  </div>
+
+  <!-- Action buttons -->
+  <div class="button-group">
+    <button (click)="deposit()" class="btn custom-btn success">Deposit</button>
+    <!-- <button (click)="addPay()" class="btn custom-btn primary">Pay to Company Volt</button> -->
+  </div>
+
+  <!-- Message -->
+  <p class="message" *ngIf="message">{{ message }}</p>
+</div>

@@ -1,0 +1,194 @@
+<div id="wrapper">
+  <!-- Sidebar -->
+  <ul class="navbar-nav sidebar sidebar-dark accordion shadow-lg" id="accordionSidebar">
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex flex-column align-items-center justify-content-center py-3" href="index.html">
+      <div class="sidebar-brand-icon rotate-n-15 text-warning">
+        <i class="fas fa-building fa-2x"></i>
+      </div>
+      <div class="sidebar-brand-text mx-3 text-warning fw-bold">
+        General Insurance
+      </div>
+      <img class="img-profile rounded-circle mt-3 border border-warning shadow"
+        height="100px" width="100px" src="/img/Copilot_20250715_133912.png" />
+    </a>
+
+    <hr class="sidebar-divider my-2 bg-light" />
+
+    <!-- Policy Menu -->
+    <!-- <ng-container *ngIf="userRole === 'ADMIN'">
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo">
+          <i class="fas fa-shield-alt text-warning"></i>
+          <span>Policy</span>
+        </a>
+        <div id="collapseTwo" class="collapse">
+          <div class="bg-gradient-light py-2 collapse-inner rounded shadow-sm">
+            <a class="collapse-item" href="car"><i class="fas fa-car me-2 text-primary"></i>Car Insurance</a>
+            <a class="collapse-item" href="fire"><i class="fas fa-fire-alt me-2 text-danger"></i>Fire Insurance</a>
+          </div>
+        </div>
+      </li>
+    </ng-container> -->
+
+    <!-- Fire Policy -->
+    <ng-container *ngIf="userRole=== 'ADMIN'">
+      <li class="nav-item mt-5">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne">
+          <i class="fas fa-fire text-danger"></i>
+          <span>Fire Policy</span>
+        </a>
+        <div id="collapseOne" class="collapse">
+          <div class="bg-gradient-light py-2 collapse-inner rounded shadow-sm">
+            <a class="collapse-item" routerLink="viewpolicy">🔥 Show Fire Policy</a>
+            <a class="collapse-item" routerLink="viewbill">📜 View Fire Bill</a>
+            <a class="collapse-item" routerLink="createreceipt">➕ Add Fire Receipt</a>
+            <a class="collapse-item" routerLink="viewreciept">📂 View Fire Receipt</a>
+          </div>
+        </div>
+      </li>
+    </ng-container>
+
+    <!-- Car Policy -->
+    <ng-container *ngIf="userRole === 'ADMIN'">
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree">
+          <i class="fas fa-car-side text-primary"></i>
+          <span>Car Policy</span>
+        </a>
+        <div id="collapseThree" class="collapse">
+          <div class="bg-gradient-light py-2 collapse-inner rounded shadow-sm">
+            <a class="collapse-item" routerLink="viewcarpolicy">🚗 Show Car Policy</a>
+            <a class="collapse-item" routerLink="viewcarbil">📜 View Car Bill</a>
+            <a class="collapse-item" routerLink="createcarreceipt">➕ Add Car Receipt</a>
+            <a class="collapse-item" routerLink="viewcarreciept">📂 View Car Receipt</a>
+          </div>
+        </div>
+      </li>
+    </ng-container>
+
+    <!-- Create Bill -->
+    <ng-container *ngIf="userRole === 'ADMIN'">
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour">
+          <i class="fas fa-file-invoice-dollar text-success"></i>
+          <span>Create Bill</span>
+        </a>
+        <div id="collapseFour" class="collapse">
+          <div class="bg-gradient-light py-2 collapse-inner rounded shadow-sm">
+            <a class="collapse-item" routerLink="createbill">🔥 Fire Bill</a>
+            <a class="collapse-item" routerLink="creatcarbil">🚗 Car Bill</a>
+          </div>
+        </div>
+      </li>
+    </ng-container>
+
+    <!-- Account Section -->
+    <ng-container *ngIf="userRole === 'ADMIN'">
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive">
+          <i class="fas fa-wallet text-info"></i>
+          <span>Account Section</span>
+        </a>
+        <div id="collapseFive" class="collapse">
+          <div class="bg-gradient-light py-2 collapse-inner rounded shadow-sm">
+            <a class="collapse-item" routerLink="paymenttovolt">💰 Payment</a>
+            <a class="collapse-item" routerLink="showcompanyvolt">🏦 Show Balance</a>
+            <a class="collapse-item" routerLink="depositetouser">⬆ Deposit To User</a>
+            <a class="collapse-item" routerLink="showpaymentdetails">📊 Payment Details</a>
+          </div>
+        </div>
+      </li>
+    </ng-container>
+
+    <hr class="sidebar-divider d-none d-md-block bg-light" />
+
+    <!-- Sidebar Toggler -->
+    <div class="text-center d-none d-md-inline">
+      <button class="rounded-circle border-0 bg-warning shadow" id="sidebarToggle"></button>
+    </div>
+  </ul>
+
+  <!-- Content Wrapper -->
+  <div id="content-wrapper" class="d-flex flex-column">
+    <!-- Main Content -->
+    <div id="content">
+      <!-- Topbar -->
+      <nav class="navbar navbar-expand navbar-dark bg-dark bg-opacity-75 topbar mb-4 shadow-lg rounded-bottom">
+        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle me-3 text-light">
+          <i class="fa fa-bars"></i>
+        </button>
+
+        <!-- Search -->
+        <form class="d-none d-sm-inline-block form-inline me-auto ms-md-3 my-2 mw-100 navbar-search">
+          <div class="input-group shadow-sm">
+            <input type="text" class="form-control bg-light border-0 small"
+              placeholder="Search for..." aria-label="Search" />
+            <button class="btn btn-warning" type="button">
+              <i class="fas fa-search fa-sm"></i>
+            </button>
+          </div>
+        </form>
+
+        <!-- Right Navbar -->
+        <ul class="navbar-nav ms-auto">
+          <ng-container *ngIf="userRole !== 'ADMIN' && userRole !== 'USER'">
+            <li class="nav-item">
+              <a class="nav-link text-light" href="login"><i class="fas fa-sign-in-alt"></i> Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-light" href="reg"><i class="fas fa-user-plus"></i> Register</a>
+            </li>
+          </ng-container>
+
+          <!-- Bill Dropdown -->
+          <ng-container>
+            <form class="d-flex align-items-center ms-3" [formGroup]="routingForm">
+              <ng-container *ngIf="userRole === 'ADMIN'">
+                <label for="billType" class="text-white me-2 mb-0"><b>Create Bill</b></label>
+                <select class="form-select form-select-sm me-2 shadow" formControlName="routing"
+                  (change)="visitRouter()" id="billType" style="min-width: 180px;">
+                  <option value="" disabled selected>Select Bill</option>
+                  <option value="createbill">Fire Bill</option>
+                  <option value="creatcarbil">Car Bill</option>
+                </select>
+              </ng-container>
+            </form>
+          </ng-container>
+
+          <!-- Divider -->
+          <div class="topbar-divider d-none d-sm-block"></div>
+
+          <!-- User Info -->
+          <li class="nav-item dropdown no-arrow">
+            <a class="nav-link dropdown-toggle text-light" href="#" id="userDropdown" role="button" data-toggle="dropdown">
+              <span class="me-2 d-none d-lg-inline">Sadiar Rahman</span>
+              <img class="img-profile rounded-circle border border-warning shadow-sm"
+                src="img/undraw_profile.svg" />
+            </a>
+            <div class="dropdown-menu dropdown-menu-end shadow rounded">
+              <a class="dropdown-item" routerLink="userProfile"><i class="fas fa-user me-2"></i> Profile</a>
+              <a class="dropdown-item" href="#"><i class="fas fa-cogs me-2"></i> Settings</a>
+              <a class="dropdown-item" href="#"><i class="fas fa-list me-2"></i> Activity Log</a>
+            </div>
+          </li>
+
+          <!-- Logout -->
+          <ng-container *ngIf="userRole==='ADMIN' || userRole === 'USER'">
+            <button class="logout-btn btn btn-outline-warning ms-3 px-4 fw-bold shadow-sm"
+              routerLink="logout">Logout</button>
+          </ng-container>
+        </ul>
+      </nav>
+
+      <!-- Router Outlet -->
+      <router-outlet></router-outlet>
+
+      <!-- Footer -->
+      <footer class="sticky-footer text-white text-center py-3 shadow-lg"
+        style="background: linear-gradient(to right,#2a5298,#1e3c72);">
+        <span>© General Insurance Management System 2025</span>
+      </footer>
+    </div>
+  </div>
+</div>

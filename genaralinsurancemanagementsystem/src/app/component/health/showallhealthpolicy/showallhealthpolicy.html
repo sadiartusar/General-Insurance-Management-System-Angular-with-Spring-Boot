@@ -1,0 +1,65 @@
+<div class="main-wrapper">
+  <div class="left-image">
+    <img src="/img/istockphoto-1418999473-1024x1024.jpg" alt="Doctor and Patient" />
+  </div>
+
+  <div class="form-box">
+    <div class="form-header">
+      Hospitalization – Hospitalization/Surgery/Disability<br />
+      <strong>Health Cashback Facilities</strong>
+    </div>
+
+     <form [formGroup]="formGroup" >
+        <div class="row">
+            <div class="col-md-6">
+                <label for="exampleInputEmail1" class="form-label">Policy Holder Name</label>
+                <input type="text" class="form-control"  formControlName="policyHolderName" placeholder="Full Name">
+            </div>
+
+            <div class="col-md-6">
+                <label for="exampleInputEmail1" class="form-label">Age</label>
+                <input type="number" class="form-control"  formControlName="age" placeholder="example@gmail.com">
+            </div>        
+        </div>
+        
+
+        <div class="row">
+            <div class="col-md-6">
+                <label for="exampleInputEmail1" class="form-label">Gender</label>
+                <input type="text" class="form-control"  formControlName="gender" placeholder="Full Name">
+            </div>
+
+        </div>
+        <div class="col-md-6">
+                <label for="exampleInputEmail1" class="form-label">Sum Insured</label>
+                <input type="number" class="form-control"  formControlName="sumInsured" placeholder="Full Name">
+            </div>
+        <div class="col-md-6">
+                <label for="exampleInputEmail1" class="form-label">Start Date</label>
+                <input type="date" class="form-control"  formControlName="policyStartDate" placeholder="Full Name">
+            </div>
+        <div class="col-md-6">
+                <label for="exampleInputEmail1" class="form-label">End Date</label>
+                <input type="date" class="form-control"  formControlName="policyEndDate" placeholder="Full Name">
+            </div>
+            <div class="col-md-6">
+                <label for="exampleInputEmail1" class="form-label">Nominee Name</label>
+                <input type="text" class="form-control"  formControlName="nomineeName" placeholder="Full Name">
+            </div>
+            <div class="col-md-6">
+                <label for="exampleInputEmail1" class="form-label">Email</label>
+                <input type="email" class="form-control"  formControlName="email" placeholder="Full Name">
+            </div>
+
+        <div class="row mt-3 text-center">
+            <div class="col-md-6">
+                <button type="submit" class="btn btn-success text-center"  (click)="addPolicy()">Save</button>
+
+            </div>
+
+           
+        </div>
+    </form>
+
+  </div>
+</div>

@@ -1,0 +1,104 @@
+<div class="key-frames">
+  <div class="container my-4">
+    <div class="form-card shadow-lg rounded-4 p-4 animate__animated animate__fadeInDown">
+      <div class="bg-gradient text-center py-3 rounded-3 mb-4">
+        <h1 class="form-title text-dark">Add Policy</h1>
+      </div>
+
+      <!-- start form -->
+      <form [formGroup]="formValue" method="post">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label fw-bold">Date</label>
+            <input type="date" class="form-control custom-input" formControlName="date">
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label fw-bold">Coverage</label>
+            <input type="text" class="form-control custom-input" formControlName="coverage" readonly>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label fw-bold">Bank Name</label>
+            <input type="text" class="form-control custom-input" formControlName="bankName">
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label fw-bold">Policy Holder</label>
+            <input type="text" class="form-control custom-input" formControlName="policyholder">
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label fw-bold">Address</label>
+            <input type="text" class="form-control custom-input" formControlName="address">
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label fw-bold">Sum Insured</label>
+            <input type="number" class="form-control custom-input" formControlName="sumInsured">
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label fw-bold">Stock Insured</label>
+            <input type="text" class="form-control custom-input" formControlName="stockInsured">
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label fw-bold">Interested Insured</label>
+            <input type="text" class="form-control custom-input" formControlName="interestInsured">
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label fw-bold">Location</label>
+            <input type="text" class="form-control custom-input" formControlName="location">
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label fw-bold">Construction</label>
+            <select class="form-control custom-input" formControlName="construction">
+              <option value="">-- Select Construction Type --</option>
+              <option value="1st class">1st class</option>
+              <option value="2nd class">2nd class</option>
+              <option value="3rd class">3rd class</option>
+            </select>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label fw-bold">Owner</label>
+            <input type="text" class="form-control custom-input" formControlName="owner">
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label fw-bold">Used As</label>
+            <select class="form-control custom-input" formControlName="usedAs">
+              <option value="">-- Select Usage Type --</option>
+              <option value="Shop Only">Shop Only</option>
+              <option value="Godown Only">Godown Only</option>
+              <option value="Shop-Cum-Godown Only">Shop-Cum-Godown Only</option>
+            </select>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label fw-bold">Period From</label>
+            <input type="date" class="form-control custom-input" formControlName="periodFrom">
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label fw-bold">Period To</label>
+            <input type="date" class="form-control custom-input" formControlName="periodTo">
+          </div>
+        </div>
+
+        <div class="row mt-4 text-center">
+          <div class="col-md-6">
+            <button type="submit" class="btn btn-success w-75 btn-animate" (click)="createCarPolicy()">Save</button>
+          </div>
+          <div class="col-md-6">
+            <button type="reset" class="btn btn-danger w-75 btn-animate">Reset</button>
+          </div>
+        </div>
+      </form>
+      <!-- end form -->
+    </div>
+  </div>
+</div>

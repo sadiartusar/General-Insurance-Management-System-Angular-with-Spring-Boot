@@ -1,0 +1,23 @@
+<div class="container mt-4">
+  <h2 class="title">Company Volt Accounts</h2>
+
+  <div class="table-responsive">
+    <table class="custom-table animate-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Account Name</th>
+          <th>Company Balance</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pol of company_volt_account; let i = index"
+            [style.animationDelay]="(i * 0.15) + 's'">
+          <td>{{ i + 1 }}</td>
+          <td>{{ pol.name }}</td>
+          <td class="balance">{{ pol.balance }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

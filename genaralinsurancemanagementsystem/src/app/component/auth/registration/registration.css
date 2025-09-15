@@ -1,0 +1,68 @@
+/* Center the form and add nice shadow & padding */
+.register-container {
+  max-width: 500px;
+  margin: auto;
+  margin-top: 60px;
+  background: rgb(14, 73, 201);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  animation: fadeInUp 1s ease;
+}
+
+/* Full-page soft gradient background */
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(120deg, #6a21ad 0%, #8ec5fc 100%);
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+
+/* Title Animation */
+.animated-title {
+  font-family: 'Segoe UI', sans-serif;
+  font-weight: 700;
+  color: #c387eb;
+  animation: fadeInDown 1s ease-in-out;
+}
+
+/* Smooth Input Animation */
+.animated-input {
+  transition: all 0.3s ease;
+}
+
+.animated-input:focus {
+  border-color: #6c63ff;
+  box-shadow: 0 0 0 0.2rem rgba(108, 99, 255, 0.25);
+}
+
+/* Custom Gradient Button */
+.btn-gradient {
+  background: linear-gradient(to right, #6a11cb, #2575fc);
+  color: white;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+}
+
+.btn-gradient:hover {
+  background: linear-gradient(to right, #5f10b8, #1f63d3);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(101, 96, 255, 0.3);
+}
+
+/* Fade-in form animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

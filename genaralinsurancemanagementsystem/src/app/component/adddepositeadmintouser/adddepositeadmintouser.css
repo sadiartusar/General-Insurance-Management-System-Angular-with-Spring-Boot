@@ -1,0 +1,97 @@
+/* Container Styling */
+.payment-container {
+  max-width: 400px;
+  margin: 50px auto;
+  background: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  transition: all 0.3s ease;
+}
+
+/* Title */
+.payment-container h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Balance Text */
+.balance {
+  font-weight: 600;
+  color: #4caf50;
+  margin-bottom: 20px;
+}
+
+/* Form Styling */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.input-animated {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  transition: 0.3s ease-in-out;
+  font-size: 16px;
+}
+
+.input-animated:focus {
+  border-color: #2196f3;
+  outline: none;
+  box-shadow: 0 0 8px rgba(33, 150, 243, 0.4);
+}
+
+/* Button Styling */
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.custom-btn {
+  flex: 1;
+  padding: 10px 15px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.custom-btn.success {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+.custom-btn.primary {
+  background-color: #2196f3;
+  color: #fff;
+}
+
+.custom-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Message Styling */
+.message {
+  margin-top: 20px;
+  text-align: center;
+  font-weight: 600;
+  color: #ff5722;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+/* Fade Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

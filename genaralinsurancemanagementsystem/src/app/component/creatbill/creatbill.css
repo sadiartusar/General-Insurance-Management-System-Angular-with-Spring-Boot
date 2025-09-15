@@ -1,0 +1,77 @@
+/* Background and overall vibe */
+body {
+  background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+  background-attachment: fixed;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Form container with soft color and shadows */
+.bill-form-container {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  animation: fadeInUp 1s ease;
+}
+
+/* Form title style */
+.form-title {
+  color: #ff6f61;
+  font-weight: 700;
+  font-size: 28px;
+  letter-spacing: 1px;
+}
+
+/* Gradient Button */
+.btn-gradient {
+  background: linear-gradient(to right, #ff758c, #ff7eb3);
+  border: none;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.btn-gradient:hover {
+  background: linear-gradient(to right, #ff5b7f, #ff6a9e);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 117, 140, 0.3);
+}
+
+/* Inputs and Selects with glow focus */
+.form-control,
+.custom-select {
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus,
+.custom-select:focus {
+  border-color: #ff758c;
+  box-shadow: 0 0 5px rgba(255, 117, 140, 0.5);
+}
+
+/* Icon spacing */
+label i {
+  color: #ff758c;
+  margin-right: 6px;
+}
+
+/* Fade in animation */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .bill-form-container {
+    padding: 20px;
+    border-radius: 15px;
+  }
+}

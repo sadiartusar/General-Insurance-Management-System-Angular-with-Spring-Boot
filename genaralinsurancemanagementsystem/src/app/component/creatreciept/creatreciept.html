@@ -1,0 +1,126 @@
+<form [formGroup]="receiptForm" (ngSubmit)="createReceipt()">
+  <div class="form-wrapper animate__animated animate__fadeInUp shadow-lg p-4 rounded">
+
+    <h3 class="text-center mb-4 fw-bold text-gradient">
+      <i class="fas fa-file-invoice-dollar me-2"></i> Money Receipt Create Form
+    </h3>
+
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="issuingOffice" class="form-label fw-semibold">
+          <i class="fas fa-building text-primary me-2"></i> Issuing Office
+        </label>
+        <input type="text" class="form-control smart-input" id="issuingOffice"
+          formControlName="issuingOffice" placeholder="Enter issuing office">
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- Class Of Insurance -->
+      <div class="col-md-6 mb-3">
+        <label for="classOfInsurance" class="form-label fw-semibold">
+          <i class="fas fa-shield-alt text-success me-2"></i> Class Of Insurance
+        </label>
+        <select class="form-control smart-input" id="classOfInsurance" formControlName="classOfInsurance">
+          <option value="" disabled>Select Class Of Insurance</option>
+          <option value="Fire Insurance">Fire Insurance</option>
+          <option value="Marine Insurance">Marine Insurance</option>
+          <option value="Motor Insurance">Motor Insurance</option>
+        </select>
+      </div>
+
+      <!-- Date -->
+      <div class="col-md-6 mb-3">
+        <label for="date" class="form-label fw-semibold">
+          <i class="fas fa-calendar-alt text-danger me-2"></i> Date
+        </label>
+        <input type="date" class="form-control smart-input" id="date" formControlName="date">
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- Mode of Payment -->
+      <div class="col-md-6 mb-3">
+        <label for="modeOfPayment" class="form-label fw-semibold">
+          <i class="fas fa-wallet text-warning me-2"></i> Mode Of Payment
+        </label>
+        <select class="form-control smart-input" id="modeOfPayment" formControlName="modeOfPayment">
+          <option value="" disabled>Select Mode Of Payment</option>
+          <option value="Cash">Cash</option>
+          <option value="Credit Card">Credit Card</option>
+          <option value="Bank Transfer">Bank Transfer</option>
+          <option value="Cheque">Cheque</option>
+        </select>
+      </div>
+
+      <!-- Issued Against -->
+      <div class="col-md-6 mb-3">
+        <label for="issuedAgainst" class="form-label fw-semibold">
+          <i class="fas fa-file-alt text-info me-2"></i> Issued Against
+        </label>
+        <input type="text" class="form-control smart-input" id="issuedAgainst"
+          formControlName="issuedAgainst" placeholder="Enter issued against">
+      </div>
+    </div>
+
+    <!-- Bill Section -->
+    <div formGroupName="bill" class="p-3 bg-light rounded shadow-sm animate__animated animate__fadeIn">
+
+      <!-- Policy Section -->
+      <div formGroupName="policies">
+        <div class="row">
+          <!-- Policy Holder -->
+          <div class="col-md-6 mb-3">
+            <label for="policyholder" class="form-label fw-semibold">
+              <i class="fas fa-user text-primary me-2"></i> Policy Holder
+            </label>
+            <select id="policyholder" formControlName="policyholder" class="form-control smart-input">
+              <option value="" disabled>Select your policy holder</option>
+              <option *ngFor="let b of bill" [value]="b.firePolicy.policyholder">
+                {{ b.firePolicy.policyholder }}
+              </option>
+            </select>
+          </div>
+
+          <!-- Bank Name -->
+          <div class="col-md-6 mb-3">
+            <label for="bankName" class="form-label fw-semibold">
+              <i class="fas fa-university text-success me-2"></i> Bank Name
+            </label>
+            <input type="text" class="form-control smart-input" id="bankName"
+              formControlName="bankName" placeholder="Enter bank name">
+          </div>
+        </div>
+
+        <div class="row">
+          <!-- Address -->
+          <div class="col-md-6 mb-3">
+            <label for="address" class="form-label fw-semibold">
+              <i class="fas fa-home text-danger me-2"></i> Address
+            </label>
+            <input type="text" class="form-control smart-input" id="address"
+              formControlName="address" placeholder="Enter address">
+          </div>
+
+          <!-- Location -->
+          <div class="col-md-6 mb-3">
+            <label for="location" class="form-label fw-semibold">
+              <i class="fas fa-map-marker-alt text-warning me-2"></i> Location
+            </label>
+            <input type="text" class="form-control smart-input" id="location"
+              formControlName="location" placeholder="Enter location">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="text-center mt-4">
+      <button type="submit" class="btn btn-gradient rounded-pill shadow-sm px-4 py-2 animate__animated animate__pulse animate__infinite"
+        [disabled]="!receiptForm.valid">
+        <i class="fas fa-paper-plane me-2"></i> Submit
+      </button>
+    </div>
+
+  </div>
+</form>

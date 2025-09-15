@@ -1,0 +1,134 @@
+<!-- Add Bill -->
+<div class="container d-flex justify-content-center">
+  <div class="col-md-10 mb-4 card shadow-lg border-0 form-wrapper animate__animated animate__fadeInUp">
+    <h3 class="text-center text-3xl fw-bold mb-4 text-gradient">
+      <i class="fas fa-file-invoice-dollar me-2"></i>
+      Car Bill Add Form
+    </h3>
+
+    <form [formGroup]="billForm" (ngSubmit)="createCarBill()" class="p-3">
+      <div class="row">
+        <!-- Policy Holder -->
+        <div class="form-group col-md-6 mb-3" formGroupName="cars">
+          <label for="policyholder" class="fw-semibold">
+            <i class="fas fa-user me-2 text-primary"></i>
+            Policy Holder
+          </label>
+          <select id="policyholder" formControlName="policyholder" class="form-control smart-select" required>
+            <option value="" disabled>Select your policy holder</option>
+            <option *ngFor="let co of cars" [ngValue]="co.policyholder">{{co.policyholder}}</option>
+          </select>
+        </div>
+
+        <!-- Address -->
+        <div class="form-group col-md-6 mb-3" formGroupName="cars">
+          <label for="address" class="fw-semibold">
+            <i class="fas fa-map-marker-alt me-2 text-danger"></i>
+            Address
+          </label>
+          <select id="address" formControlName="address" class="form-control smart-select" required>
+            <option value="" disabled>Select your address</option>
+            <option *ngFor="let co of cars" [ngValue]="co.address">{{co.address}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Stock Insured -->
+        <div class="form-group col-md-6 mb-3" formGroupName="cars">
+          <label for="stockInsured" class="fw-semibold">
+            <i class="fas fa-box me-2 text-success"></i>
+            Stock Insured
+          </label>
+          <select id="stockInsured" formControlName="stockInsured" class="form-control smart-select" required>
+            <option value="" disabled>Select your stock insured</option>
+            <option *ngFor="let co of cars" [ngValue]="co.stockInsured">{{co.stockInsured}}</option>
+          </select>
+        </div>
+
+        <!-- Construction -->
+        <div class="form-group col-md-6 mb-3" formGroupName="cars">
+          <label for="construction" class="fw-semibold">
+            <i class="fas fa-building me-2 text-warning"></i>
+            Construction
+          </label>
+          <select id="construction" formControlName="construction" class="form-control smart-select" required>
+            <option value="" disabled>Select your construction</option>
+            <option *ngFor="let co of cars" [ngValue]="co.construction">{{co.construction}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Sum Insured -->
+        <div class="form-group col-md-6 mb-3" formGroupName="cars">
+          <label for="sumInsured" class="fw-semibold">
+            <i class="fas fa-dollar-sign me-2 text-success"></i>
+            Sum Insured
+          </label>
+          <select id="sumInsured" formControlName="sumInsured" class="form-control smart-select" required>
+            <option value="" disabled>Select sum insured</option>
+            <option *ngFor="let co of cars" [ngValue]="co.sumInsured">{{co.sumInsured}}</option>
+          </select>
+        </div>
+
+        <!-- Car Rate -->
+        <div class="form-group col-md-6 mb-3">
+          <label for="carRate" class="fw-semibold">
+            <i class="fas fa-car-side me-2 text-info"></i>
+            Car Rate
+          </label>
+          <input id="carRate" type="number" class="form-control" formControlName="carRate" placeholder="Enter car rate">
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- R&SD Rate -->
+        <div class="col-md-6 mb-3">
+          <label for="rsd" class="fw-semibold">
+            <i class="fas fa-chart-line me-2 text-primary"></i>
+            R&SD Rate
+          </label>
+          <input id="rsd" type="number" class="form-control" formControlName="rsd" placeholder="Enter your R&SD rate">
+        </div>
+
+        <!-- Net Premium -->
+        <div class="col-md-6 mb-3">
+          <label for="netPremium" class="fw-semibold">
+            <i class="fas fa-wallet me-2 text-success"></i>
+            Net Premium
+          </label>
+          <input id="netPremium" type="number" class="form-control" formControlName="netPremium" placeholder="Net Premium" readonly>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Tax -->
+        <div class="col-md-6 mb-3">
+          <label for="tax" class="fw-semibold">
+            <i class="fas fa-receipt me-2 text-danger"></i>
+            Tax Rate
+          </label>
+          <input id="tax" type="number" class="form-control" formControlName="tax" placeholder="Enter your tax rate" readonly>
+        </div>
+
+        <!-- Gross Premium -->
+        <div class="col-md-6 mb-3">
+          <label for="grossPremium" class="fw-semibold">
+            <i class="fas fa-euro-sign me-2 text-dark"></i>
+            Gross Premium
+          </label>
+          <input id="grossPremium" type="number" class="form-control" formControlName="grossPremium" placeholder="Gross Premium" readonly>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="text-center mb-3">
+        <button type="submit" class="btn btn-gradient rounded-pill shadow-sm px-4 py-2 animate__animated animate__pulse animate__infinite">
+          <i class="fas fa-paper-plane me-2"></i>
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

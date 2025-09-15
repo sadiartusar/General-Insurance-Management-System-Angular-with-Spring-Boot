@@ -1,0 +1,55 @@
+@Entity
+public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+    private String email;
+    private String password;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "receipt_id") // foreign key in User table
+    private Receipt receipt;
+
+    // getters & setters
+}
+
+🔹 Receipt.java
+@Entity
+public class Receipt {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private Double amount;
+    private String details;
+
+    @OneToOne(mappedBy = "receipt")
+    private User user;
+
+    // getters & setters
+}
+
+🔄 Explanation:
+
+@OneToOne(mappedBy = "receipt"):
+
+Receipt entity bole dey je relation control kore User side.
+
+@JoinColumn(name = "receipt_id"):
+
+Eta bole je User table e receipt_id column thakbe.
+
+Eta Receipt table er primary key ke reference korbe — foreign key.
+
+🧾 Table Structure:
+User Table:
+id	name	email	receipt_id
+1	Rahim	rahim@gmail.com
+	101
+Receipt Table:
+id	amount	details
+101	5000	First payment
