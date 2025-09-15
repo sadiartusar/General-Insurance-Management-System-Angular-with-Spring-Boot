@@ -44,9 +44,10 @@ payAmount(senderId: number, receiverId: number, amount: number): Observable<stri
 
 
   // Get user account balance
-  getUserBalance(id: number): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/balance/${id}`);
-  }
+getUserBalance(id: number): Observable<number> {
+  return this.http.get<number>(`${this.baseUrl}/balance/${id}`);
+}
+
 
   // // Get company balance
   // getCompanyBalance(id: number): Observable<any> {

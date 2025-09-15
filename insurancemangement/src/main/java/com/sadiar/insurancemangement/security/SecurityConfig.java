@@ -65,6 +65,7 @@ public class SecurityConfig {
                                 "/api/payment/showcompanydetails",
                                 "/api/payment/allpaymentdetails",
                                 "/api/user/all"
+
                                 ).permitAll()
 
                         // Protected endpoints

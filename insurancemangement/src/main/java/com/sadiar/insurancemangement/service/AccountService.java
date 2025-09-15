@@ -51,7 +51,7 @@ public class AccountService {
 //    }
 
     // Get user balance
-    public Double getUserBalance(int id) {
+    public Double getUserBalance(long id) {
         Account account = accountRepository.findByUserId(id)
                 .orElseThrow(() -> new RuntimeException("User account not found"));
         return account.getAmount();

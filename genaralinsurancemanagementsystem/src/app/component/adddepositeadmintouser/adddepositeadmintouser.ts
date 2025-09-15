@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { PaymentService } from '../../service/payment.service';
 import { Router } from '@angular/router';
+import { Account } from '../../model/account.model';
 
 @Component({
   selector: 'app-adddepositeadmintouser',
@@ -12,13 +13,17 @@ import { Router } from '@angular/router';
 export class Adddepositeadmintouser {
 
   accountId!:number
- id: number = 1; // Example user id
+//  id: number = 1; // Example user id
   amount: number = 0;
-  userBalance: number = 0;
+  userBalance: number | undefined;
+
+
+
   companyBalance: number = 0;
   message: string = '';
   paymentForm!: FormGroup;
   // voltId:Number=1;
+  accountIdforUser!: Account;
 
   constructor(private paymentService: PaymentService,
     private router: Router,
@@ -45,18 +50,29 @@ export class Adddepositeadmintouser {
   //   );
   // }
 
-    loadBalances(): void {
-    this.paymentService.getCompanyBalance()
-      .subscribe({
-        next: balance => {
-          this.companyBalance = balance;
-          this.cdr.markForCheck();
-        },
-        error: error => {
-          console.error('Error loading balance:', error);
-        }
-      });
+   loadBalances(): void {
+  if (!this.accountId) {
+    this.userBalance = undefined;
+    return;
   }
+
+  this.paymentService.getUserBalance(this.accountId)
+    .subscribe({
+      next: balance => {
+        this.userBalance = balance;
+        this.cdr.markForCheck();
+      },
+      error: error => {
+        console.error('Error loading balance:', error);
+        this.userBalance = undefined;
+        this.message = 'Failed to load user balance';
+      }
+    });
+}
+
+
+
+
 
    deposit(): void {
 

@@ -84,7 +84,7 @@ public class PaymentRestController {
 
     // Get user account balance
     @GetMapping("/balance/{id}")
-    public ResponseEntity<Double> getUserBalance(@PathVariable int id) {
+    public ResponseEntity<Double> getUserBalance(@PathVariable long id) {
         try {
             Double balance = accountService.getUserBalance(id);
             return ResponseEntity.ok(balance);
