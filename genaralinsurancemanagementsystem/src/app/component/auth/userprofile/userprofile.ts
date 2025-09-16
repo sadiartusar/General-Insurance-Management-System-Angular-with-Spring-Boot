@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { User } from '../../../model/user.model';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../../../service/auth.service';
@@ -8,6 +8,7 @@ import { BilmodelService } from '../../../service/bilmodel.service';
 import { BillModel } from '../../../model/bill.model';
 import { ReceiptModel } from '../../../model/receipt.model';
 import { ReceiptService } from '../../../service/receipt.service';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-userprofile',
@@ -33,9 +34,26 @@ export class Userprofile implements OnInit{
      private moneyreceiptService: ReceiptService,
     
     private route: ActivatedRoute,
-    
+     @Inject(PLATFORM_ID) private platformId: Object
   ) { }
   ngOnInit(): void {
+     if (isPlatformBrowser(this.platformId)) {
+      // ✅ Safe to access localStorage in browser
+      this.user = localStorage.getItem('userRole');
+
+      // Subscribe to role changes from AuthService
+      this.authService.userRole$.subscribe(role => {
+        this.user = role;
+        console.log('User Role updated:', role);
+        this.cdr.detectChanges(); // Force UI update
+      });
+
+      // Optional: reload from localStorage on refresh
+      const roleFromStorage = localStorage.getItem('userRole');
+      if (roleFromStorage) {
+        this.user = roleFromStorage;
+      }
+    }
      const id = this.route.snapshot.params['id'];
     this.moneyreceiptService.getReciptById(id).subscribe({
       next: (response) => {

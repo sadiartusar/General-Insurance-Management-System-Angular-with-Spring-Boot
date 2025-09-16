@@ -110,16 +110,31 @@ export class AuthService {
   }
 
   logout(): void {
-    this.clearCurrentUser();
 
     if (this.isBrowser()) {
       localStorage.removeItem('token');
       localStorage.removeItem('authToken');
       localStorage.removeItem('userRole');
+      this.userRoleSubject.next(null);
     }
 
+  }
 
-    // this.userRoleSubject.next(null);
+    isTokenExpired(token: string): boolean {
+    const docodeToken = this.decodeToken(token);
+
+    const expiry = docodeToken.exp * 1000;
+    return Date.now() > expiry;
+  }
+
+   isLoggIn(): boolean {
+    const token = this.getToken();
+    if (token && !this.isTokenExpired(token)) {
+      return true;
+    }
+    this.logout();
+    return false;
+
   }
 
 

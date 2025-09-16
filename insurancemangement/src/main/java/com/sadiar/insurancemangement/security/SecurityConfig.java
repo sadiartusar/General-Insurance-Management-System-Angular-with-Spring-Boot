@@ -48,6 +48,8 @@ public class SecurityConfig {
 
                                 "/api/user/all"
                         ).permitAll()
+                        .requestMatchers("/api/user/logout").hasAnyRole("ADMIN", "USER")
+
 
 
                         .requestMatchers(
@@ -73,7 +75,7 @@ public class SecurityConfig {
                         ).hasRole("ADMIN")
 
 
-                        .requestMatchers("/api/user/register/user","/api/user/profile").hasRole("USER")
+                        .requestMatchers("/api/user/register/user","/api/user/profile","/api/firemoneyreciept/**").hasRole("USER")
 
 
                         .anyRequest().authenticated()
