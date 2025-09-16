@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/carpolicy")
-@CrossOrigin("*")
+
 public class CarPolicyRestController {
 
     @Autowired

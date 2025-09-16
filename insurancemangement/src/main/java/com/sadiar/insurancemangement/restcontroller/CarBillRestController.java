@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/carbill")
-@CrossOrigin("*")
+
 public class CarBillRestController {
 
     @Autowired

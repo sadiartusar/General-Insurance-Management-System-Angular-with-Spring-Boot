@@ -25,7 +25,9 @@ constructor(
   }
 
   loadPolicy(): void{
+    
     this.policies=this.policyService.getAllPolicies();
+    console.log(this.policies);
     this.cdr.markForCheck();
   }
 

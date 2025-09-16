@@ -12,52 +12,37 @@ import { Account } from '../../model/account.model';
 })
 export class Adddepositeadmintouser {
 
-  accountId!:number
-//  id: number = 1; // Example user id
+  accountId!: number;
   amount: number = 0;
   userBalance: number | undefined;
-
-
-
   companyBalance: number = 0;
   message: string = '';
   paymentForm!: FormGroup;
-  // voltId:Number=1;
   accountIdforUser!: Account;
 
-  constructor(private paymentService: PaymentService,
+  constructor(
+    private paymentService: PaymentService,
     private router: Router,
     private cdr: ChangeDetectorRef,
-    private formBuilder: FormBuilder,
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit(): void {
-    
-    this.loadBalances();
+    // load company balance on init if needed
+    this.paymentService.getCompanyBalance().subscribe({
+      next: balance => this.companyBalance = balance,
+      error: err => console.error(err)
+    });
   }
 
-  // loadBalances(): void {
-  //   this.paymentService.getUserBalance(this.id).subscribe(
-  //     balance => this.userBalance = balance,
-      
-  //     err => console.error(err)
-     
-  //   );
+  // 🔑 Called when user leaves (focus out) from Account ID input
+  loadBalances(): void {
+    if (!this.accountId) {
+      this.userBalance = undefined;
+      return;
+    }
 
-  //   this.paymentService.getCompanyBalance().subscribe(
-  //     balance => this.companyBalance = balance,
-  //     err => console.error(err)
-  //   );
-  // }
-
-   loadBalances(): void {
-  if (!this.accountId) {
-    this.userBalance = undefined;
-    return;
-  }
-
-  this.paymentService.getUserBalance(this.accountId)
-    .subscribe({
+    this.paymentService.getUserBalance(this.accountId).subscribe({
       next: balance => {
         this.userBalance = balance;
         this.cdr.markForCheck();
@@ -68,115 +53,28 @@ export class Adddepositeadmintouser {
         this.message = 'Failed to load user balance';
       }
     });
-}
+  }
 
-
-
-
-
-   deposit(): void {
-
+  deposit(): void {
     if (!this.accountId || !this.amount) {
-    this.message = 'Please enter both Account ID and Amount';
-    return;
+      this.message = 'Please enter both Account ID and Amount';
+      return;
+    }
+
+    this.paymentService.deposit(this.accountId, this.amount).subscribe({
+      next: balance => {
+        this.message = (balance as any).message || 'Deposit successful';
+        this.loadBalances();
+        this.cdr.markForCheck();
+
+        // reset form fields
+        this.accountId = 0;
+        this.amount = 0;
+        this.cdr.detectChanges(); // update view
+      },
+      error: error => {
+        console.error('Error :', error);
+      }
+    });
   }
-    
-    this.paymentService.deposit(this.accountId, this.amount)
-      .subscribe({
-        next: balance => {
-          this.message = (balance as any).message || 'Deposite successful';
-          this.loadBalances();
-          this.cdr.markForCheck();
-          this.cdr.reattach();
-          // reset form fields
-      this.accountId = 0;
-      this.amount = 0;
-
-      this.cdr.detectChanges(); // update view
-        },
-        error: error => {
-          console.error('Error :', error);
-        }
-      });
-  }
-
-  // deposit(): void {
-  //   this.paymentService.deposit(this.id, this.amount).subscribe(
-  //     res => {
-  //       this.message = res;
-  //       this.loadBalances();
-  //     },
-  //     err => this.message = err.error
-  //   );
-  // }
-
-  // pay(): void {
-  //   this.paymentService.pay(this.id, this.amount).subscribe(
-  //     res => {
-  //       this.message = res;
-  //       this.loadBalances();
-  //       this.cdr.markForCheck();
-  //     },
-  //     err => this.message = err.error
-  //   );
-  // }
-
-  //   pay(): void {
-  //   this.paymentService.pay(this.id, this.amount)
-  //     .subscribe({
-  //       next: res => {
-  //         this.message = (res as any).message || 'Payment successful';
-  //         this.loadBalances();
-  //         this.cdr.reattach();
-  //         //  window.location.reload();
-  //         // form reset
-  //     this.amount = 0;
-          
-  //       },
-  //       error: error => {
-  //         console.error('Error :', error);
-  //       }
-  //     });
-  // }
-
-  //  addPay(): void {
-  //   this.paymentService.pay(this.id, this.amount)
-  //     .subscribe({
-  //       next: res => {
-  //         this.message = (res as any).message || 'Payment successful';
-  //         this.loadBalances();
-  //         this.cdr.reattach();
-  //         //  window.location.reload();
-  //         // form reset
-  //     this.amount = 0;
-          
-  //       },
-  //       error: error => {
-  //         console.error('Error :', error);
-  //       }
-  //     });
-  // }
-
-  // addPay(): void {
-  //   if (this.paymentForm.invalid) {
-  //     this.message = 'Please fill all fields correctly';
-  //     return;
-  //   }
-
-  //   const { senderId, receiverId, amount } = this.paymentForm.value;
-
-  //   this.paymentService.payAmount(senderId, receiverId, amount)
-  //     .subscribe({
-  //       next: res => {
-  //         this.message = res || 'Transfer successful';
-  //         this.loadBalances();
-  //         this.paymentForm.reset();
-  //         this.cdr.detectChanges();
-  //       },
-  //       error: err => {
-  //         this.message = err.error || 'Transfer failed';
-  //         console.error('Error :', err);
-  //       }
-  //     });
-  // }
 }

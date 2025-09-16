@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import { CarModel } from '../model/car.model';
 import { environment } from '../environment/environment';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -11,12 +12,21 @@ export class CarService {
 
  private baseUrl = environment.apiBaseUrl+'/carpolicy';
 
-  constructor(private http :HttpClient) { }
+  constructor(private http: HttpClient,
+      @Inject(PLATFORM_ID) private platformId: Object) { }
 
 
 // View all carpolicy
   viewAllCarPolicy(): Observable<any> {
-    return this.http.get(this.baseUrl)
+    let headers = new HttpHeaders();
+
+    if (isPlatformBrowser(this.platformId)) {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        headers = headers.set('Authorization', 'Bearer ' + token);
+      }
+    }
+    return this.http.get(this.baseUrl, { headers })
       .pipe(
         catchError(this.handleError) // Handle error globally
       );
@@ -24,7 +34,16 @@ export class CarService {
 
   // View all carpolicy with typing
   viewAllCarPolicyForBill(): Observable<CarModel[]> {
-    return this.http.get<CarModel[]>(this.baseUrl)
+
+    let headers = new HttpHeaders();
+
+    if (isPlatformBrowser(this.platformId)) {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        headers = headers.set('Authorization', 'Bearer ' + token);
+      }
+    }
+    return this.http.get<CarModel[]>(this.baseUrl, { headers })
       .pipe(
         catchError(this.handleError)
       );
@@ -32,7 +51,15 @@ export class CarService {
 
   // Create a new policy
   createCarPolicy(car: CarModel): Observable<any> {
-    return this.http.post(this.baseUrl+"/add", car)
+    let headers = new HttpHeaders();
+
+    if (isPlatformBrowser(this.platformId)) {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        headers = headers.set('Authorization', 'Bearer ' + token);
+      }
+    }
+    return this.http.post(this.baseUrl+"/add", car, { headers })
       .pipe(
         catchError(this.handleError)
       );
@@ -40,7 +67,15 @@ export class CarService {
 
   // Delete a Car policy by ID
   deleteCarPolicy(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${id}`)
+    let headers = new HttpHeaders();
+
+    if (isPlatformBrowser(this.platformId)) {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        headers = headers.set('Authorization', 'Bearer ' + token);
+      }
+    }
+    return this.http.delete(`${this.baseUrl}/${id}`, { headers })
       .pipe(
         catchError(this.handleError)
       );
@@ -48,7 +83,15 @@ export class CarService {
 
   // Update a Car policy by ID
   updateCarPolicy(id: number, car: CarModel): Observable<any> {
-    return this.http.put(`${this.baseUrl}/${id}`, car)
+    let headers = new HttpHeaders();
+
+    if (isPlatformBrowser(this.platformId)) {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        headers = headers.set('Authorization', 'Bearer ' + token);
+      }
+    }
+    return this.http.put(`${this.baseUrl}/${id}`, car, { headers })
       .pipe(
         catchError(this.handleError)
       );
@@ -56,7 +99,15 @@ export class CarService {
 
   // Get a policy by ID
   getByCarPolicyId(id: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/${id}`)
+    let headers = new HttpHeaders();
+
+    if (isPlatformBrowser(this.platformId)) {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        headers = headers.set('Authorization', 'Bearer ' + token);
+      }
+    }
+    return this.http.get(`${this.baseUrl}/${id}`, { headers })
       .pipe(
         catchError(this.handleError)
       );
@@ -66,7 +117,15 @@ export class CarService {
 
   // Get all policies
   getAllCarPolicy(): Observable<CarModel[]> {
-    return this.http.get<CarModel[]>(this.baseUrl);
+    let headers = new HttpHeaders();
+
+    if (isPlatformBrowser(this.platformId)) {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        headers = headers.set('Authorization', 'Bearer ' + token);
+      }
+    }
+    return this.http.get<CarModel[]>(this.baseUrl, { headers });
   }
 
   // Error handling

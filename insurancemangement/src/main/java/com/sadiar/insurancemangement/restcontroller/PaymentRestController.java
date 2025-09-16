@@ -117,6 +117,7 @@ public class PaymentRestController {
 
     @GetMapping("/allpaymentdetails")
     public List<PaymentDTO> getAllPayment() {
+        System.out.println("Hello, Fockup...");
         return paymentService.getAllPaymentDetails();
     }
 

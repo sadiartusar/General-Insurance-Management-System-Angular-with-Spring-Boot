@@ -36,15 +36,22 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(req -> req
+
                         .requestMatchers(
-                                        "/api/user",
-                                        "/api/user/register/user",
-                                        "/api/user/register/admin",
-                                        "/api/admin/login",
-                                        "/api/user/login",
-                                        "/auth/login",
-                                        "/images/**",
+                                "/api/user/login",
+                                "/api/user",
+                                "/api/user/register/user",
+                                "/api/user/register/admin",
+                                "/auth/login",
+                                "/images/**",
                                 "/api/user/active/**",
+
+                                "/api/user/all"
+                        ).permitAll()
+
+
+                        .requestMatchers(
+                                "/api/user/register/admin",
                                 "/api/firepolicy/**",
                                 "/api/firepolicy/add",
                                 "/api/firebill/add",
@@ -57,24 +64,18 @@ public class SecurityConfig {
                                 "/api/carbill/add",
                                 "/api/carmoneyreciept/**",
                                 "/api/carmoneyreciept/add",
-                                "/api/user/profile",
                                 "/api/payment/deposit/**",
                                 "/api/payment/balance/**",
                                 "/api/payment/pay",
                                 "/api/payment/company-balance/**",
                                 "/api/payment/showcompanydetails",
-                                "/api/payment/allpaymentdetails",
-                                "/api/user/all"
+                                "/api/payment/allpaymentdetails"
+                        ).hasRole("ADMIN")
 
-                                ).permitAll()
 
-                        // Protected endpoints
-                        .requestMatchers("/api/user/register/admin").hasAuthority("ADMIN")
-                        .requestMatchers("/api/user/register/user").hasAuthority("USER")
-                        .requestMatchers(
-                                "/api/admin/login"
-                                ).hasAuthority("ADMIN")
-                        .requestMatchers("/api/user/login").hasAuthority("USER")
+                        .requestMatchers("/api/user/register/user","/api/user/profile").hasRole("USER")
+
+
                         .anyRequest().authenticated()
                 )
                 .userDetailsService(userService)
@@ -86,7 +87,8 @@ public class SecurityConfig {
     }
 
     @Bean
-    public JwtAuthenticationFilter jwtAuthenticationFilter(JwtService jwtService, UserService userService) {
+    public JwtAuthenticationFilter jwtAuthenticationFilter(com.sadiar.insurancemangement.jwt.JwtService jwtService,
+                                                           UserService userService) {
         return new JwtAuthenticationFilter(jwtService, userService);
     }
 
@@ -99,7 +101,6 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {

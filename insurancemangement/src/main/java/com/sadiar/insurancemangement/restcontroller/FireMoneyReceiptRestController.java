@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/firemoneyreciept")
-@CrossOrigin("*")
+
 public class FireMoneyReceiptRestController {
 
     @Autowired

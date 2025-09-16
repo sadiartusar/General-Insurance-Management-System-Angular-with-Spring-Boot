@@ -52,7 +52,7 @@ public class AccountService {
 
     // Get user balance
     public Double getUserBalance(long id) {
-        Account account = accountRepository.findByUserId(id)
+        Account account = accountRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User account not found"));
         return account.getAmount();
     }
@@ -157,7 +157,7 @@ public void depositMoney(Long id, Double amount) {
     // Transfer money from one user account to another (or Volt)
     public void payToVolt(long senderId, long receiverId, Double amount) {
         // Sender account
-        Account senderAccount = accountRepository.findByUserId(senderId)
+        Account senderAccount = accountRepository.findById(senderId)
                 .orElseThrow(() -> new RuntimeException("Sender account not found"));
 
         // Receiver account

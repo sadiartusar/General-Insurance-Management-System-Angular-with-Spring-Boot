@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import { PolicyModel } from '../model/policy';
 import { environment } from '../environment/environment';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +12,20 @@ export class PolicymodelService {
 
    private baseUrl = environment.apiBaseUrl+'/firepolicy';
 
-  constructor(private http: HttpClient) { }
-
+  constructor(  private http: HttpClient,
+      @Inject(PLATFORM_ID) private platformId: Object
+    ) { }
   // View all policies
   viewAllPolicy(): Observable<any> {
-    return this.http.get(this.baseUrl)
+     let headers = new HttpHeaders();
+
+    if (isPlatformBrowser(this.platformId)) {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        headers = headers.set('Authorization', 'Bearer ' + token);
+      }
+    }
+    return this.http.get(this.baseUrl, { headers })
       .pipe(
         catchError(this.handleError) // Handle error globally
       );
@@ -31,7 +41,15 @@ export class PolicymodelService {
 
   // Create a new policy
   createPolicy(policy: PolicyModel): Observable<any> {
-    return this.http.post(this.baseUrl+"/add", policy)
+     let headers = new HttpHeaders();
+
+    if (isPlatformBrowser(this.platformId)) {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        headers = headers.set('Authorization', 'Bearer ' + token);
+      }
+    }
+    return this.http.post(this.baseUrl+"/add", policy, { headers })
       .pipe(
         catchError(this.handleError)
       );
@@ -39,7 +57,15 @@ export class PolicymodelService {
 
   // Delete a policy by ID
   deletePolicy(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${id}`)
+    let headers = new HttpHeaders();
+
+    if (isPlatformBrowser(this.platformId)) {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        headers = headers.set('Authorization', 'Bearer ' + token);
+      }
+    }
+    return this.http.delete(`${this.baseUrl}/${id}`, { headers })
       .pipe(
         catchError(this.handleError)
       );
@@ -47,7 +73,16 @@ export class PolicymodelService {
 
   // Update a policy by ID
   updatePolicy(id: number, policy: PolicyModel): Observable<any> {
-    return this.http.put(`${this.baseUrl}/${id}`, policy)
+    let headers = new HttpHeaders();
+
+    if (isPlatformBrowser(this.platformId)) {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        headers = headers.set('Authorization', 'Bearer ' + token);
+      }
+    }
+    
+    return this.http.put(`${this.baseUrl}/${id}`, policy, { headers })
       .pipe(
         catchError(this.handleError)
       );
@@ -55,7 +90,15 @@ export class PolicymodelService {
 
   // Get a policy by ID
   getByPolicyId(id: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/${id}`)
+    let headers = new HttpHeaders();
+
+    if (isPlatformBrowser(this.platformId)) {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        headers = headers.set('Authorization', 'Bearer ' + token);
+      }
+    }
+    return this.http.get(`${this.baseUrl}/${id}`, { headers })
       .pipe(
         catchError(this.handleError)
       );
@@ -65,7 +108,15 @@ export class PolicymodelService {
 
   // Get all policies
   getAllPolicies(): Observable<PolicyModel[]> {
-    return this.http.get<PolicyModel[]>(this.baseUrl);
+    let headers = new HttpHeaders();
+
+    if (isPlatformBrowser(this.platformId)) {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        headers = headers.set('Authorization', 'Bearer ' + token);
+      }
+    }
+    return this.http.get<PolicyModel[]>(this.baseUrl, { headers });
   }
 
   // Error handling

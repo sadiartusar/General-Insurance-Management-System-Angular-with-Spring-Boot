@@ -68,8 +68,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 || path.equals("/api/admin/login")
                 || path.startsWith("/images/")
                 || path.startsWith("/api/user/active/")
-                || path.startsWith("/auth/login")
-                ||path.startsWith("/api/payment/balance");
+                || path.startsWith("/auth/login");
         // Removed: path.startsWith("/api/user") to allow filtering on /api/user/profile etc.
     }
 }

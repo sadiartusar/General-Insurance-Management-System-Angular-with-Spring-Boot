@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/firebill")
-@CrossOrigin("*")
+
 public class FireBillRestController {
 
     @Autowired

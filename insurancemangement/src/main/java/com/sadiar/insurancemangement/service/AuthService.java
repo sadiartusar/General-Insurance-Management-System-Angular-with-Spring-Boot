@@ -214,16 +214,16 @@ public class AuthService {
 
 
     public void registerUser(User user, MultipartFile imageFile, boolean isAdmin) {
-        // ছবি থাকলে সেভ করা
+
         if (imageFile != null && !imageFile.isEmpty()) {
             String filename = saveImage(imageFile, user);
             user.setPhoto(filename);
         }
 
-        // পাসওয়ার্ড এনকোড
+
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-        // Role সেট করা
+
         if (isAdmin) {
             user.setRole(Role.ADMIN);
             user.setActive(true); // Admin সরাসরি active হবে
@@ -236,7 +236,7 @@ public class AuthService {
 
         User savedUser = userRepo.save(user);
 
-        // ✅ 🔄 Auto-create account for user
+
 
         if(!isAdmin) {
             Account account = new Account();
@@ -245,15 +245,15 @@ public class AuthService {
             account.setUser(savedUser);
             accountRepository.save(account);
 
-            // ✅ Optional: Set account back to user
+
             savedUser.setAccount(account);
             userRepo.save(savedUser);
         }
-        // JWT টোকেন জেনারেট
+
         String jwt = jwtService.generateToken(savedUser);
         saveUserToken(jwt, savedUser);
 
-        // শুধু User রেজিস্ট্রেশনে email activation যাবে
+
         if (!isAdmin) {
             sendActivationEmail(savedUser);
         }
@@ -269,10 +269,10 @@ public class AuthService {
         admin.setRole(Role.ADMIN);
         admin.setActive(true);
         adminRepository.save(admin);
-//        sendActivationEmail(admin);
+
         Admin savedAdmin = adminRepository.save(admin);
 
-        // Now generate token and save Token associated with savedUser
+
         String jwt = jwtService.generateTokenForAdmin(savedAdmin);
         saveAdminToken(jwt, savedAdmin);
     }

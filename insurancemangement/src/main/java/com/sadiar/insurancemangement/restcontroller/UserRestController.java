@@ -102,7 +102,7 @@ public class UserRestController {
 
 
 
-    @PostMapping("login")
+    @PostMapping("/login")
     public ResponseEntity<AuthenticationResponse>  login(@RequestBody User request){
         return ResponseEntity.ok(authService.authenticate(request));
 

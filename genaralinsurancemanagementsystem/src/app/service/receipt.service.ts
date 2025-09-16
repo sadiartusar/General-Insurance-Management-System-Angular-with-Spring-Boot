@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ReceiptModel } from '../model/receipt.model';
 import { environment } from '../environment/environment';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -11,14 +12,31 @@ export class ReceiptService {
 
  private baseUrl = environment.apiBaseUrl+'/firemoneyreciept';
 
-  constructor(private http: HttpClient) { }
+  constructor( private http: HttpClient,
+      @Inject(PLATFORM_ID) private platformId: Object) { }
 
   getAllReciept():Observable<ReceiptModel[]>{
-    return this.http.get<ReceiptModel[]>(this.baseUrl);
+    let headers = new HttpHeaders();
+
+    if (isPlatformBrowser(this.platformId)) {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        headers = headers.set('Authorization', 'Bearer ' + token);
+      }
+    }
+    return this.http.get<ReceiptModel[]>(this.baseUrl, { headers });
   }
 
   getReciptById(id:number):Observable<ReceiptModel>{
-    return this.http.get<ReceiptModel>(this.baseUrl+"/"+id);
+    let headers = new HttpHeaders();
+
+    if (isPlatformBrowser(this.platformId)) {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        headers = headers.set('Authorization', 'Bearer ' + token);
+      }
+    }
+    return this.http.get<ReceiptModel>(this.baseUrl+"/"+id, { headers });
   }
 
   // creatRecipt(receipt:ReceiptModel): Observable<ReceiptModel>{
@@ -26,19 +44,44 @@ export class ReceiptService {
   // }
 
   createRecipt(receipt: ReceiptModel, billId: number): Observable<ReceiptModel> {
-    return this.http.post<ReceiptModel>(`${this.baseUrl}/add?billId=${billId}`, receipt);
+    let headers = new HttpHeaders();
+
+    if (isPlatformBrowser(this.platformId)) {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        headers = headers.set('Authorization', 'Bearer ' + token);
+      }
+    }
+    return this.http.post<ReceiptModel>(`${this.baseUrl}/add?billId=${billId}`, receipt, { headers });
   }
 
   deleteRecipt(id:number):Observable<any>{
-return this.http.delete(this.baseUrl+"/"+id);
+    let headers = new HttpHeaders();
+
+    if (isPlatformBrowser(this.platformId)) {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        headers = headers.set('Authorization', 'Bearer ' + token);
+      }
+    }
+return this.http.delete(this.baseUrl+"/"+id,{ headers });
   }
 
    updateMoneyReceipt(id: number, moneyreciept: ReceiptModel): Observable<any> {
-    return this.http.put(this.baseUrl + "update/" + id, moneyreciept);
+    let headers = new HttpHeaders();
+
+    if (isPlatformBrowser(this.platformId)) {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        headers = headers.set('Authorization', 'Bearer ' + token);
+      }
+    }
+    return this.http.put(this.baseUrl + "update/" + id, moneyreciept, { headers });
   }
 
   // Filter receipts by policyholder, bankName, or id on the client side
   searchByPolicyHolderAndBankNameAndId(receipts: ReceiptModel[], searchTerm: string): ReceiptModel[] {
+    
     const lowerCaseSearchTerm = searchTerm.toLowerCase();
 
     return receipts.filter(item =>
