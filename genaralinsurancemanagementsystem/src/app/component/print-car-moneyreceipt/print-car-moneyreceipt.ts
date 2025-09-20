@@ -41,7 +41,7 @@ export class PrintCarMoneyreceipt {
     }
   
     getCarRate(): number {
-      return (this.moneyreceipt?.carBill?.carRate ?? 0) / 100;
+      return (this.moneyreceipt?.carBill?.carRate ?? 0);
     }
   
     getTotalFire(): number {
@@ -51,7 +51,7 @@ export class PrintCarMoneyreceipt {
     }
   
     getRsdRate(): number {
-      return (this.moneyreceipt?.carBill?.rsd ?? 0) / 100;
+      return (this.moneyreceipt?.carBill?.rsd ?? 0);
     }
   
     getTotalRsd(): number {
@@ -61,7 +61,7 @@ export class PrintCarMoneyreceipt {
     }
   
     getTaxRate(): number {
-      return (this.moneyreceipt?.carBill?.tax ?? 0) / 100;
+      return (this.moneyreceipt?.carBill?.tax ?? 0);
     }
   
     getTotalPremium(): number {

@@ -99,20 +99,23 @@ export class Carbillcreat implements OnInit{
   }
 
   calculatePremiums(): void {
-    const formValues = this.billForm.value;
-    const sumInsured = formValues.cars.sumInsured || 0;
-    const carRate = formValues.carRate || 0;
-    const rsdRate = formValues.rsd || 0;
-    const taxRate = formValues.tax || 0;
+  const carRate = parseFloat(this.billForm.get('carRate')?.value) || 0;
+  const rsdRate = parseFloat(this.billForm.get('rsd')?.value) || 0;
+  const taxRate = parseFloat(this.billForm.get('tax')?.value) || 0;
+  const sumInsured = parseFloat(this.billForm.get('cars.sumInsured')?.value) || 0;
 
-    const netPremium = (sumInsured * carRate + sumInsured * rsdRate);
-    const grossPremium = netPremium + (netPremium * taxRate);
+  const netPremium = (sumInsured * carRate) + (sumInsured * rsdRate);
+  const grossPremium = netPremium + (netPremium * taxRate);
 
-    this.billForm.patchValue({
-      netPremium: netPremium,
-      grossPremium: grossPremium
-    }, { emitEvent: false });
-  }
+  this.billForm.patchValue({
+    netPremium: netPremium.toFixed(2),
+    grossPremium: grossPremium.toFixed(2)
+  }, { emitEvent: false });
+
+  console.log(`🔍 sumInsured: ${sumInsured}, carRate: ${carRate}, rsd: ${rsdRate}, tax: ${taxRate}`);
+  console.log(`💰 Net Premium: ${netPremium}, Gross Premium: ${grossPremium}`);
+}
+
 
   createCarBill(): void {
     const formValues = this.billForm.value;
