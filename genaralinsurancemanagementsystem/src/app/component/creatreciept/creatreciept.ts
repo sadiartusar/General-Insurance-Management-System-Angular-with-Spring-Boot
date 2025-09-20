@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
   selector: 'app-creatreciept',
   standalone: false,
   templateUrl: './creatreciept.html',
-  styleUrls: ['./creatreciept.css'] // ✅ fixed
+  styleUrls: ['./creatreciept.css'] 
 })
 export class Creatreciept implements OnInit {
   id!: number;
@@ -127,10 +127,10 @@ export class Creatreciept implements OnInit {
         date: formValues.date,
         modeOfPayment: formValues.modeOfPayment,
         issuedAgainst: formValues.issuedAgainst,
-        // fireBill: formValues.bill.id // ✅ fixed
+        
       };
 
-      const billId = formValues.bill.id; // ✅ fixed
+      const billId = formValues.bill.id; 
 
       console.log("BillId:", billId);
       this.receiptService.createRecipt(this.receipt, billId).subscribe({
