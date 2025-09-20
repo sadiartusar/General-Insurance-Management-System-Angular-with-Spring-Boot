@@ -63,7 +63,7 @@ export class PrintFireCoverNote implements OnInit {
   }
 
   getTaxRate(): number {
-    return (this.moneyreceipt?.fireBill?.tax ?? 0) / 100;
+    return (this.moneyreceipt?.fireBill?.tax ?? 0);
   }
 
   getTotalPremium(): number {

@@ -34,7 +34,7 @@ formValue!: FormGroup;
       address: [''],
       sumInsured: [''],
       stockInsured: [''],
-      interestInsured: [''],
+      interestInsured: ['Hotel & Resturent'],
       coverage: ['Fire & Lightning Only'],
       location: [''],
       construction: [''],
