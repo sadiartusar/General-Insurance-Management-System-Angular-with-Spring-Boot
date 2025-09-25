@@ -1,5 +1,6 @@
 <div id="wrapper">
   <!-- Sidebar -->
+    <ng-container *ngIf="userRole=== 'ADMIN'">
   <ul class="navbar-nav sidebar sidebar-dark accordion shadow-lg" id="accordionSidebar">
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex flex-column align-items-center justify-content-center py-3" href="index.html">
@@ -32,7 +33,7 @@
     </ng-container> -->
 
     <!-- Fire Policy -->
-    <ng-container *ngIf="userRole=== 'ADMIN'">
+    <!-- <ng-container *ngIf="userRole=== 'ADMIN'"> -->
       <li class="nav-item mt-5">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne">
           <i class="fas fa-fire text-danger"></i>
@@ -47,10 +48,10 @@
           </div>
         </div>
       </li>
-    </ng-container>
+    <!-- </ng-container> -->
 
     <!-- Car Policy -->
-    <ng-container *ngIf="userRole === 'ADMIN'">
+    <!-- <ng-container *ngIf="userRole === 'ADMIN'"> -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree">
           <i class="fas fa-car-side text-primary"></i>
@@ -65,10 +66,10 @@
           </div>
         </div>
       </li>
-    </ng-container>
+    <!-- </ng-container> -->
 
     <!-- Create Bill -->
-    <ng-container *ngIf="userRole === 'ADMIN'">
+    <!-- <ng-container *ngIf="userRole === 'ADMIN'"> -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour">
           <i class="fas fa-file-invoice-dollar text-success"></i>
@@ -81,10 +82,10 @@
           </div>
         </div>
       </li>
-    </ng-container>
+    <!-- </ng-container> -->
 
     <!-- Account Section -->
-    <ng-container *ngIf="userRole === 'ADMIN'">
+    <!-- <ng-container *ngIf="userRole === 'ADMIN'"> -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive">
           <i class="fas fa-wallet text-info"></i>
@@ -99,15 +100,18 @@
           </div>
         </div>
       </li>
-    </ng-container>
+    <!-- </ng-container> -->
 
     <hr class="sidebar-divider d-none d-md-block bg-light" />
 
     <!-- Sidebar Toggler -->
+      
     <div class="text-center d-none d-md-inline">
       <button class="rounded-circle border-0 bg-warning shadow" id="sidebarToggle"></button>
     </div>
+      
   </ul>
+  </ng-container>
 
   <!-- Content Wrapper -->
   <div id="content-wrapper" class="d-flex flex-column">
@@ -168,8 +172,8 @@
             </a>
             <div class="dropdown-menu dropdown-menu-end shadow rounded">
               <a class="dropdown-item" routerLink="userProfile"><i class="fas fa-user me-2"></i> Profile</a>
-              <a class="dropdown-item" href="#"><i class="fas fa-cogs me-2"></i> Settings</a>
-              <a class="dropdown-item" href="#"><i class="fas fa-list me-2"></i> Activity Log</a>
+              <a class="dropdown-item" routerLink="home"><i class="fas fa-cogs me-2"></i>Home</a>
+              
             </div>
           </li>
 
