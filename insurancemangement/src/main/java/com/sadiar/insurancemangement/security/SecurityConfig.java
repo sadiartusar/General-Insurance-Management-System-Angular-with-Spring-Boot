@@ -72,6 +72,7 @@ public class SecurityConfig {
                                 "/api/payment/company-balance/**",
                                 "/api/payment/showcompanydetails",
                                 "/api/payment/allpaymentdetails"
+//                                "/api/user/profile"
                         ).hasRole("ADMIN")
 
 
