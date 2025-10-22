@@ -68,7 +68,7 @@ public class SecurityConfig {
                                 "/api/carmoneyreciept/add",
                                 "/api/payment/deposit/**",
                                 "/api/payment/balance/**",
-                                "/api/payment/pay",
+//                                "/api/payment/pay",
                                 "/api/payment/company-balance/**",
                                 "/api/payment/showcompanydetails",
                                 "/api/payment/allpaymentdetails"
