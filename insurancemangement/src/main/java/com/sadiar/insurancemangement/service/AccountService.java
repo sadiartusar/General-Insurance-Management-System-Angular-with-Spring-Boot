@@ -104,7 +104,7 @@ public void depositMoney(Long id, Double amount) {
 
 
     // Fetch user account by userId
-    public Account getUserAccount(int id) {
+    public Account getUserAccount(long id) {
         return accountRepository.findByUserId(id)
                 .orElseThrow(() -> new RuntimeException("User account not found"));
     }

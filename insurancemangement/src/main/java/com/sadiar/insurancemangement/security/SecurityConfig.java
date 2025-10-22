@@ -76,7 +76,7 @@ public class SecurityConfig {
                         ).hasRole("ADMIN")
 
 
-                        .requestMatchers("/api/user/register/user","/api/user/profile","/api/firemoneyreciept/**","/api/payment/pay","/api/payment/deposit/**").hasRole("USER")
+                        .requestMatchers("/api/user/register/user","/api/user/profile","/api/firemoneyreciept/**","/api/payment/pay","/api/payment/deposit/**","/api/payment/{userId}/account").hasRole("USER")
 
 
                         .anyRequest().authenticated()

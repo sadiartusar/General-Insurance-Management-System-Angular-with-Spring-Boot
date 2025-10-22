@@ -1,5 +1,7 @@
 package com.sadiar.insurancemangement.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -21,6 +23,7 @@ public class Account {
     private String paymentMode; // UPI, CARD, CASH
 
     @OneToOne
+    @JsonIgnoreProperties("tokens,account")
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 

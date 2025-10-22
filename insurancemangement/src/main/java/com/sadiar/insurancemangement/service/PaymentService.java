@@ -8,7 +8,10 @@ import com.sadiar.insurancemangement.entity.Payment;
 import com.sadiar.insurancemangement.entity.User;
 import com.sadiar.insurancemangement.repository.IPaymentRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Date;
 import java.util.List;
@@ -112,5 +115,6 @@ public class PaymentService {
             return dto;
         }).toList();
     }
+
 
 }

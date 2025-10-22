@@ -20,6 +20,7 @@ public class Payment {
     private String paymentMode; // UPI, CARD, CASH
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "user_id")
     private User user; // যিনি payment করছেন
 

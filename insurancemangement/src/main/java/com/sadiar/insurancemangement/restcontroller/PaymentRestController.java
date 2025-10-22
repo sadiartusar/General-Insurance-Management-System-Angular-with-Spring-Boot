@@ -125,4 +125,14 @@ public class PaymentRestController {
     public List<UserDTO> getAllUserDetails() {
         return authService.getAllUserDetails();
     }
+
+    @GetMapping("/{userId}/account")
+    public ResponseEntity<Account> getUserAccountDetails(@PathVariable long userId) {
+
+        Account account = accountService.getUserAccount(userId);
+
+        return ResponseEntity.ok(account);
+
+    }
+
 }
