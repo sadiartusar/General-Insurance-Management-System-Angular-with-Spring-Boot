@@ -23,7 +23,7 @@ public class Account {
     private String paymentMode; // UPI, CARD, CASH
 
     @OneToOne
-    @JsonIgnoreProperties("tokens,account")
+    @JsonIgnore
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 

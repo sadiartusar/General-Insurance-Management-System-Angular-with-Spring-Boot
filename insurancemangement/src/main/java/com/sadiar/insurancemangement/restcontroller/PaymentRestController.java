@@ -3,12 +3,15 @@ package com.sadiar.insurancemangement.restcontroller;
 import com.sadiar.insurancemangement.dto.PaymentDTO;
 import com.sadiar.insurancemangement.dto.UserDTO;
 import com.sadiar.insurancemangement.entity.*;
+import com.sadiar.insurancemangement.repository.IAccountRepository;
 import com.sadiar.insurancemangement.service.AccountService;
 import com.sadiar.insurancemangement.service.AuthService;
 import com.sadiar.insurancemangement.service.CompanyVoltService;
 import com.sadiar.insurancemangement.service.PaymentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,6 +25,9 @@ public class PaymentRestController {
     private final PaymentService paymentService;
     private final CompanyVoltService companyVoltService;
     private final AuthService  authService;
+
+    @Autowired
+    private IAccountRepository accountRepository;
 
     public PaymentRestController(AccountService accountService, PaymentService paymentService,CompanyVoltService companyVoltService, AuthService  authService) {
         this.accountService = accountService;
@@ -126,13 +132,22 @@ public class PaymentRestController {
         return authService.getAllUserDetails();
     }
 
-    @GetMapping("/{userId}/account")
-    public ResponseEntity<Account> getUserAccountDetails(@PathVariable long userId) {
+//    @GetMapping("/{userId}/account")
+//    public ResponseEntity<Account> getUserAccountDetails(@PathVariable long userId) {
+//
+//        Account account = accountService.getUserAccount(userId);
+//
+//        return ResponseEntity.ok(account);
+//
+//    }
 
-        Account account = accountService.getUserAccount(userId);
-
-        return ResponseEntity.ok(account);
-
+    @PreAuthorize("#userId == authentication.principal.id")
+    @GetMapping("/{userId}")
+    public ResponseEntity<?> getAccountByUserId(@PathVariable Long userId) {
+        return accountRepository.findByUserId(userId)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
+
 
 }
